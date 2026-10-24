@@ -96,13 +96,14 @@ class OLED:
         self.fb.text(msg, *self.__normalize_coords(x, y), color)
         return self
 
-    def pixel(self, x: int, y: int, color: int | None = None) -> OLED | int:
+    def pixel(self, x: int, y: int, color: int = 1):
         """Send a pixel to the buffer"""
-        if color is None:
-            return self.fb.pixel(x, y)
-
         self.fb.pixel(*self.__normalize_coords(x, y), color)
         return self
+
+    def get_pixel(self, x: int, y: int) -> int:
+        """Returns the color of the pixel to the buffer"""
+        return self.fb.pixel(*self.__normalize_coords(x, y))
 
     def rect(self, x: int, y: int, width: int, height: int, color: int = 1) -> OLED:
         """Send a rectangle outline to the buffer"""
